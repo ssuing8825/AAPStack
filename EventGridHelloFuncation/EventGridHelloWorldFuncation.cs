@@ -14,7 +14,7 @@ namespace ServiceBusFuncation
         [FunctionName("EventGridHelloWorldFuncation")]
         public static void Run([EventGridTrigger]EventGridEvent eventGridEvent, ILogger log)
         {
-            var StevesName = "NametoLogJoe";
+            var StevesName = "Just Changing Somthing";
             log.LogInformation($"This is the log of my name {StevesName}");
 
             log.LogInformation(eventGridEvent.Data.ToString());
