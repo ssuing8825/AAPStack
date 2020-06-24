@@ -50,8 +50,7 @@ stages:
       displayName: Build
       inputs:
         command: 'build'
-        projects: |
-          $(System.DefaultWorkingDirectory)/*.csproj
+        projects: '*.csproj'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
     - task: ArchiveFiles@2
