@@ -44,8 +44,6 @@ stages:
           Write-Host "BUILD_SOURCESDIRECTORY contents:"
           gci $Env:BUILD_SOURCESDIRECTORY
           Write-Host "Over and out."
-          Write-Host $Env:BUILD_SOURCESDIRECTORY"/AzureResources/Deploy-AzTemplate.ps1"
-          gci $Env:BUILD_SOURCESDIRECTORY"/AzureResources"
         azurePowerShellVersion: 'LatestVersion'
 
     - task: DotNetCoreCLI@2
