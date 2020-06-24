@@ -32,7 +32,7 @@ stages:
     steps:
     - task: AzurePowerShell@4
       inputs:
-        azureSubscription: 'Windows Azure MSDN - Visual Studio Ultimate(f800f678-35f3-4453-9d5f-1ce0831dada0)'
+        azureSubscription: '$(azureSubscription)'
         ScriptType: 'InlineScript'
         Inline: |
           Write-Host "Hello World from $Env:AGENT_NAME."
