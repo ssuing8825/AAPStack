@@ -40,7 +40,7 @@ steps:
       Write-Host "BUILD_SOURCESDIRECTORY contents:"
       gci $Env:BUILD_SOURCESDIRECTORY
       Write-Host "Over and out."
-      Write-Host $Env:BUILD_SOURCESDIRECTORY"/AAPStackARM/Deploy-AzTemplate.ps1"
+      Write-Host $Env:BUILD_SOURCESDIRECTORY"/AAPStackARM/Deploy-AzureResourceGroup.ps1"
        gci $Env:BUILD_SOURCESDIRECTORY"/AAPStackARM"
     azurePowerShellVersion: 'LatestVersion'
 
