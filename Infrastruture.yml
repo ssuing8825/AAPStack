@@ -48,6 +48,6 @@ steps:
   inputs:
     azureSubscription: '$(azureSubscription)'
     ScriptType: 'FilePath'
-    ScriptPath: ./AAPStackARM/Deploy-AzTemplate.ps1
+    ScriptPath: ./AAPStackARM/Deploy-AzureResourceGroup.ps1
     ScriptArguments:  -ArtifactStagingDirectory . -StorageAccountName 'AAPStack_SA' -Location eastus -TemplateFile ./AAPStackARM/AzureDeploy.json -TemplateParametersFile ./azuredeploy.parameters.json -ResourceGroupName AAPStack_RG
     azurePowerShellVersion: 'LatestVersion'
