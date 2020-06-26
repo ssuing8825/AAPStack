@@ -1,0 +1,40 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+- task: AzurePowerShell@4
+  inputs:
+    azureSubscription: 'Windows Azure MSDN - Visual Studio Ultimate(f800f678-35f3-4453-9d5f-1ce0831dada0)'
+    ScriptType: 'InlineScript'
+    Inline: |
+      Write-Host "Hello World from $Env:AGENT_NAME."
+      Write-Host "My ID is $Env:AGENT_ID."
+      Write-Host "AGENT_WORKFOLDER contents:"
+      gci $Env:AGENT_WORKFOLDER
+      Write-Host "AGENT_BUILDDIRECTORY contents:"
+      gci $Env:AGENT_BUILDDIRECTORY
+      Write-Host "BUILD_SOURCESDIRECTORY contents:"
+      gci $Env:BUILD_SOURCESDIRECTORY
+      Write-Host "Over and out."
+      Write-Host $Env:BUILD_SOURCESDIRECTORY"/AAPStackARM/Deploy-AzTemplate.ps1"
+       gci $Env:BUILD_SOURCESDIRECTORY"/AAPStackARM"
+    azurePowerShellVersion: 'LatestVersion'
+
+- task: AzurePowerShell@4
+  inputs:
+    azureSubscription: 'Windows Azure MSDN - Visual Studio Ultimate(f800f678-35f3-4453-9d5f-1ce0831dada0)'
+    ScriptType: 'FilePath'
+    ScriptPath: ./AAPStackARM/Deploy-AzTemplate.ps1
+    ScriptArguments:  -ArtifactStagingDirectory . -StorageAccountName 'AAPStack_SA' -Location eastus -TemplateFile ./AAPStackARM/AzureDeploy.json -TemplateParametersFile ./azuredeploy.parameters.json -ResourceGroupName AAPStack_RG
+    azurePowerShellVersion: 'LatestVersion'
