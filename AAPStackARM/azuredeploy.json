@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "components_AAPStack_AI_WorkspaceResourceId": {
-      "defaultValue": "AAPStack_AI_ResourceId",
+      "defaultValue": "/subscriptions/f800f678-35f3-4453-9d5f-1ce0831dada0/resourcegroups/AAPStack_RG/providers/Microsoft.OperationalInsights/workspaces/AAPStack_AI",
       "type": "SecureString"
     },
     "components_AAPStack_AI_name": {
