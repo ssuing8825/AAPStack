@@ -1,6 +1,19 @@
 trigger:
 - master
 
+variables:
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: '8df577e0-5bd6-4182-ab1c-e3048bd51b2b'
+
+  # Function app name
+  functionAppName: 'EventGridThree'
+
+  # Agent VM image name
+  vmImageName: 'vs2017-win2016'
+
+  # Working Directory
+  workingDirectory: 'c'
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -15,7 +28,7 @@ steps:
 
 - task: AzurePowerShell@4
   inputs:
-    azureSubscription: 'Windows Azure MSDN - Visual Studio Ultimate(f800f678-35f3-4453-9d5f-1ce0831dada0)'
+    azureSubscription: '$(azureSubscription)'
     ScriptType: 'InlineScript'
     Inline: |
       Write-Host "Hello World from $Env:AGENT_NAME."
@@ -33,7 +46,7 @@ steps:
 
 - task: AzurePowerShell@4
   inputs:
-    azureSubscription: 'Windows Azure MSDN - Visual Studio Ultimate(f800f678-35f3-4453-9d5f-1ce0831dada0)'
+    azureSubscription: '$(azureSubscription)'
     ScriptType: 'FilePath'
     ScriptPath: ./AAPStackARM/Deploy-AzTemplate.ps1
     ScriptArguments:  -ArtifactStagingDirectory . -StorageAccountName 'AAPStack_SA' -Location eastus -TemplateFile ./AAPStackARM/AzureDeploy.json -TemplateParametersFile ./azuredeploy.parameters.json -ResourceGroupName AAPStack_RG
