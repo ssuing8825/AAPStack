@@ -24,7 +24,8 @@
         "Flow_Type": "Redfield",
         "Request_Source": "AppServiceEnablementCreate",
         "publicNetworkAccessForIngestion": "Enabled",
-        "publicNetworkAccessForQuery": "Enabled"
+        "publicNetworkAccessForQuery": "Enabled",
+        "WorkspaceResourceId": "[parameters('components_AAPStack_AI_WorkspaceResourceId')]"
       }
     }
   ],
