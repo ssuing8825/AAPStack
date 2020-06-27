@@ -15,17 +15,15 @@
   "resources": [
     {
       "type": "microsoft.insights/components",
-      "apiVersion": "2020-02-02-preview",
+      "apiVersion": "2018-05-01-preview",
       "name": "[parameters('components_AAPStack_AI_name')]",
       "location": "eastus",
       "kind": "web",
       "properties": {
         "Application_Type": "web",
         "Flow_Type": "Redfield",
-        "Request_Source": "AppServiceEnablementCreate",
         "publicNetworkAccessForIngestion": "Enabled",
-        "publicNetworkAccessForQuery": "Enabled",
-        "WorkspaceResourceId": "[parameters('components_AAPStack_AI_WorkspaceResourceId')]"
+        "publicNetworkAccessForQuery": "Enabled"
       }
     }
   ],
