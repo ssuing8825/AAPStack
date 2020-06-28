@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		azure-pipelines.yml = azure-pipelines.yml
 		Infrastruture.yml = Infrastruture.yml
+		ExportedTemplate-JunkFunctionTest_RG\parameters.json = ExportedTemplate-JunkFunctionTest_RG\parameters.json
+		ExportedTemplate-JunkFunctionTest_RG\template.json = ExportedTemplate-JunkFunctionTest_RG\template.json
 	EndProjectSection
 EndProject
 Global

@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "components_JunkHelloWorld20200621101804_WorkspaceResourceId": {
+            "value": null
+        },
+        "sites_EventGridThree_name": {
+            "value": null
+        },
+        "serverfarms_EastUSPlan_name": {
+            "value": null
+        },
+        "systemTopics_asdfasdfasdf_name": {
+            "value": null
+        },
+        "sites_JunkHelloWorld20200621101804_name": {
+            "value": null
+        },
+        "serverfarms_ASP_JunkFunctionTestRG_b99e_name": {
+            "value": null
+        },
+        "sites_EventGridHelloFuncation20200621110552_name": {
+            "value": null
+        },
+        "components_JunkHelloWorld20200621101804_name": {
+            "value": null
+        },
+        "storageAccounts_junkhelloworld2020062110_name": {
+            "value": null
+        },
+        "configurationStores_junkconfig_ac_name": {
+            "value": null
+        },
+        "smartdetectoralertrules_failure_anomalies___junkhelloworld20200621101804_name": {
+            "value": null
+        },
+        "actiongroups_application_insights_smart_detection_externalid": {
+            "value": null
+        }
+    }
+}
