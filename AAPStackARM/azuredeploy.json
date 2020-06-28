@@ -15,7 +15,7 @@
       "type": "String"
     },
     "storageAccounts_AAPStackStorageName_name": {
-      "defaultValue": "AAPStack-storage",
+      "defaultValue": "aapstackstorage",
       "type": "String"
     },
     "serverfarms_AAPStackServerFarmName_name": {
