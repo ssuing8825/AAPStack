@@ -82,7 +82,7 @@
           "keySource": "Microsoft.Storage"
         }
       }
-    },
+    }
    ],
   "outputs": {}
 }
