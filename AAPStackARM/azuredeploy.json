@@ -7,7 +7,19 @@
       "type": "SecureString"
     },
     "components_AAPStack_AI_name": {
-      "defaultValue": "AAPStack_AI",
+      "defaultValue": "AAPStack-ai",
+      "type": "String"
+    },
+    "configurationStores_AAPStackConfig_ac_name": {
+      "defaultValue": "AAPStack-config",
+      "type": "String"
+    },
+    "storageAccounts_AAPStackStorageName_name": {
+      "defaultValue": "AAPStack-storage",
+      "type": "String"
+    },
+    "serverfarms_AAPStackServerFarmName_name": {
+      "defaultValue": "AAPStack-serverfarm",
       "type": "String"
     }
   },
@@ -24,6 +36,78 @@
         "Flow_Type": "Redfield",
         "publicNetworkAccessForIngestion": "Enabled",
         "publicNetworkAccessForQuery": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.AppConfiguration/configurationStores",
+      "apiVersion": "2019-11-01-preview",
+      "name": "[parameters('configurationStores_AAPStackConfig_ac_name')]",
+      "location": "eastus",
+      "sku": {
+        "name": "standard"
+      },
+      "properties": {
+        "encryption": {}
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2019-06-01",
+      "name": "[parameters('storageAccounts_AAPStackStorageName_name')]",
+      "location": "eastus",
+      "tags": {
+        "hidden-related:/providers/Microsoft.Web/sites/JunkHelloWorld20200621101804": "empty"
+      },
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "properties": {
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [],
+          "defaultAction": "Allow"
+        },
+        "supportsHttpsTrafficOnly": false,
+        "encryption": {
+          "services": {
+            "file": {
+              "keyType": "Account",
+              "enabled": true
+            },
+            "blob": {
+              "keyType": "Account",
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2018-02-01",
+      "name": "[parameters('serverfarms_AAPStackServerFarmName_name')]",
+      "location": "East US",
+      "sku": {
+        "name": "Y1",
+        "tier": "Dynamic",
+        "size": "Y1",
+        "family": "Y",
+        "capacity": 0
+      },
+      "kind": "functionapp",
+      "properties": {
+        "perSiteScaling": false,
+        "maximumElasticWorkerCount": 1,
+        "isSpot": false,
+        "reserved": false,
+        "isXenon": false,
+        "hyperV": false,
+        "targetWorkerCount": 0,
+        "targetWorkerSizeId": 0
       }
     }
   ],
