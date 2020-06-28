@@ -18,11 +18,7 @@
       "defaultValue": "aapstackstorage",
       "type": "String"
     },
-    "serverfarms_AAPStackServerFarmName_name": {
-      "defaultValue": "AAPStack-serverfarm",
-      "type": "String"
-    },
-    "serverfarms_ASP_AAPServerFarm_name": {
+    "serverfarms_AAPServerFarm_name": {
       "defaultValue": "AAPServerFarm",
       "type": "String"
     }
@@ -90,7 +86,7 @@
     {
       "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2018-02-01",
-      "name": "[parameters('serverfarms_ASP_AAPServerFarm_name')]",
+      "name": "[parameters('serverfarms_AAPServerFarm_name')]",
       "location": "East US",
       "sku": {
         "name": "Y1",
