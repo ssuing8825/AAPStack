@@ -55,9 +55,6 @@
       "apiVersion": "2019-06-01",
       "name": "[parameters('storageAccounts_AAPStackStorageName_name')]",
       "location": "eastus",
-      "tags": {
-        "hidden-related:/providers/Microsoft.Web/sites/JunkHelloWorld20200621101804": "empty"
-      },
       "sku": {
         "name": "Standard_LRS",
         "tier": "Standard"
@@ -86,30 +83,6 @@
         }
       }
     },
-    {
-      "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2018-02-01",
-      "name": "[parameters('serverfarms_AAPStackServerFarmName_name')]",
-      "location": "East US",
-      "sku": {
-        "name": "Y1",
-        "tier": "Dynamic",
-        "size": "Y1",
-        "family": "Y",
-        "capacity": 0
-      },
-      "kind": "functionapp",
-      "properties": {
-        "perSiteScaling": false,
-        "maximumElasticWorkerCount": 1,
-        "isSpot": false,
-        "reserved": false,
-        "isXenon": false,
-        "hyperV": false,
-        "targetWorkerCount": 0,
-        "targetWorkerSizeId": 0
-      }
-    }
-  ],
+   ],
   "outputs": {}
 }
