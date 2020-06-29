@@ -32,10 +32,6 @@
       "defaultValue": "aapstackstorage",
       "type": "String"
     },
-    "serverfarms_AAPServerFarm_name": {
-      "defaultValue": "AAPServerFarm",
-      "type": "String"
-    },
     "storageAccountType": {
       "type": "string",
       "defaultValue": "Standard_LRS",
@@ -133,7 +129,7 @@
     {
       "type": "Microsoft.Web/serverfarms",
       "apiVersion": "2019-08-01",
-      "name": "[parameters('serverfarms_AAPServerFarm_name')]",
+      "name": "[variables('hostingPlanName')]",
       "location": "[parameters('location')]",
       "sku": {
         "name": "Y1",
