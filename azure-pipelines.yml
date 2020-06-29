@@ -87,7 +87,7 @@ stages:
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
 
-            task: AzurePowerShell@4
+          - task: AzurePowerShell@4
             displayName: 'Link up Subscription'
             inputs:
               azureSubscription: '$(azureSubscription)'
