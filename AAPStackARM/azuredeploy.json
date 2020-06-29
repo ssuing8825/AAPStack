@@ -61,7 +61,7 @@
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[parameters('appName')]",
     "applicationInsightsName": "[parameters('components_AAPStack_AI_name')]",
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunctions')]",
+    "storageAccountName": "[parameters('storageAccounts_AAPStackStorageName_name')]",
     "functionWorkerRuntime": "[parameters('runtime')]",
     "insightsLocation": {
       "AzureCloud": "eastus",
