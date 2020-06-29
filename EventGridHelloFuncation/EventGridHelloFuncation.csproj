@@ -5,6 +5,16 @@
     <UserSecretsId>9b92eb99-bff9-4948-988a-9d148bf74206</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Deployment\Deploy-AzureResourceGroup.ps1" />
+    <None Remove="Deployment\linkupsubscription.json" />
+    <None Remove="Deployment\linkupsubscription.parameters.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Deployment\Deploy-AzureResourceGroup.ps1" />
+    <Content Include="Deployment\linkupsubscription.json" />
+    <Content Include="Deployment\linkupsubscription.parameters.json" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.EventGrid" Version="2.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
   </ItemGroup>
