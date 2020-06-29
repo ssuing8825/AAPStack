@@ -86,3 +86,12 @@ stages:
               appType: functionApp
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+
+            task: AzurePowerShell@4
+            displayName: 'Link up Subscription'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              ScriptType: 'FilePath'
+              ScriptPath: ./AAPStackARM/Deploy-AzureResourceGroup.ps1
+              ScriptArguments:  -ArtifactStagingDirectory . -StorageAccountName 'AAPStack_SA' -ResourceGroupLocation eastus -TemplateFile ./linkupsubscription.json -TemplateParametersFile ./linkupsubscription.parameters.json -ResourceGroupName AAPStack
+              azurePowerShellVersion: 'LatestVersion'
