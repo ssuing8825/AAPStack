@@ -55,6 +55,10 @@
       "metadata": {
         "description": "The language worker runtime to load in the function app."
       }
+    },
+    "systemTopics_SystemTopicNameForEventGrid_name": {
+      "defaultValue": "SuingSystemTopicNameforEventGrid",
+      "type": "String"
     }
   },
   "variables": {
@@ -79,6 +83,19 @@
       },
       "properties": {
         "encryption": {}
+      }
+    },
+    {
+      "type": "Microsoft.EventGrid/systemTopics",
+      "apiVersion": "2020-04-01-preview",
+      "name": "[parameters('systemTopics_SystemTopicNameForEventGrid_name')]",
+      "location": "eastus",
+      "dependsOn": [
+        "[resourceId('Microsoft.AppConfiguration/configurationStores', parameters('configurationStores_AAPStackConfig_ac_name'))]"
+      ],
+      "properties": {
+        "source": "[resourceId('Microsoft.AppConfiguration/configurationStores', parameters('configurationStores_AAPStackConfig_ac_name'))]",
+        "topicType": "Microsoft.AppConfiguration.ConfigurationStores"
       }
     },
     {
