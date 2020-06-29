@@ -109,6 +109,6 @@ stages:
             inputs:
               azureSubscription: '$(azureSubscription)'
               ScriptType: 'FilePath'
-              ScriptPath: ./Deployment/Deploy-AzureResourceGroup.ps1
+              ScriptPath: $(Build.SourcesDirectory)\Deployment\Deploy-AzureResourceGroup.ps1
               ScriptArguments:  -ArtifactStagingDirectory . -StorageAccountName 'AAPStack_SA' -ResourceGroupLocation eastus -TemplateFile ./Deployment/linkupsubscription.json -TemplateParametersFile ./Deployment/linkupsubscription.parameters.json -ResourceGroupName AAPStack
               azurePowerShellVersion: 'LatestVersion'
