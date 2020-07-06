@@ -10,6 +10,9 @@ variables:
   # Function app name
   functionAppName: 'AAPStackFunction'
 
+   # Function app name
+  functionAppNameTwo: 'AAPStackFunction'
+
   # Agent VM image name
   vmImageName: 'vs2017-win2016'
 
@@ -28,6 +31,7 @@ stages:
 
     steps:
     - task: AzurePowerShell@4
+      displayName: Write out Information
       inputs:
         azureSubscription: '$(azureSubscription)'
         ScriptType: 'InlineScript'
@@ -44,22 +48,41 @@ stages:
         azurePowerShellVersion: 'LatestVersion'
 
     - task: DotNetCoreCLI@2
-      displayName: Build
+      displayName: Build EventGridHelloFuncation
       inputs:
         command: 'build'
         projects: 'EventGridHelloFuncation/*.csproj'
-        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+        arguments: --output $(System.DefaultWorkingDirectory)/publish_output_event --configuration Release
+
+    - task: DotNetCoreCLI@2
+      displayName: Build ConversionStart
+      inputs:
+        command: 'build'
+        projects: 'COnversionStartFunction/*.csproj'
+        arguments: --output $(System.DefaultWorkingDirectory)/publish_output_convsrv --configuration Release
 
     - task: ArchiveFiles@2
-      displayName: 'Archive files'
+      displayName: 'Archive files for Event'
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output_event'
         includeRootFolder: false
         archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)event.zip
+        replaceExistingArchive: true
+    
+    - task: ArchiveFiles@2
+      displayName: 'Archive files for conv service'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output_convsrv'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)convsrv.zip
         replaceExistingArchive: true
 
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)event.zip
+      artifact: drop
+
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)convsrv.zip
       artifact: drop
 
 - stage: Deploy
@@ -80,12 +103,20 @@ stages:
 
           steps:
           - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
+            displayName: 'Deploy Event grid function'
             inputs:
               azureSubscription: '$(azureSubscription)'
               appType: functionApp
               appName: $(functionAppName)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId)event.zip'
+
+          - task: AzureFunctionApp@1
+            displayName: 'Deploy Conversion Service'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appType: functionApp
+              appName: $(functionAppName)
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId)convsrv.zip'
 
           - task: AzurePowerShell@4
             displayName: 'Azure functions app deploy'
@@ -102,13 +133,4 @@ stages:
                 Write-Host "BUILD_SOURCESDIRECTORY contents:"
                 gci $Env:BUILD_SOURCESDIRECTORY
                 Write-Host "Over and out."
-              azurePowerShellVersion: 'LatestVersion'
-
-          - task: AzurePowerShell@4
-            displayName: 'Link up Subscription'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              ScriptType: 'FilePath'
-              ScriptPath: $(Build.SourcesDirectory)\Deployment\Deploy-AzureResourceGroup.ps1
-              ScriptArguments:  -ArtifactStagingDirectory . -StorageAccountName 'AAPStack_SA' -ResourceGroupLocation eastus -TemplateFile ./Deployment/linkupsubscription.json -TemplateParametersFile ./Deployment/linkupsubscription.parameters.json -ResourceGroupName AAPStack
               azurePowerShellVersion: 'LatestVersion'
