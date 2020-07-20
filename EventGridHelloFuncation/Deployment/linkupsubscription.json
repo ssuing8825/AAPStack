@@ -77,10 +77,7 @@
       "type": "Microsoft.EventGrid/systemTopics/eventSubscriptions",
       "apiVersion": "2020-04-01-preview",
       "name": "[concat(parameters('systemTopics_SystemTopicNameForEventGrid_name'), '/ThisIstheEventSubscriptionName')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.EventGrid/systemTopics', parameters('systemTopics_SystemTopicNameForEventGrid_name'))]",
-        "[resourceId('Microsoft.Web/sites/functions', variables('functionAppName'), 'EventGridHelloWorldFuncation')]"
-      ],
+      "dependsOn": [],
       "properties": {
         "destination": {
           "properties": {
