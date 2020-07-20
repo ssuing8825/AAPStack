@@ -33,7 +33,7 @@
       "type": "String"
     },
     "storageAccounts_AAPStackStorageNameWeb_name": {
-      "defaultValue": "aapstackstorage-web",
+      "defaultValue": "aapstackstorageweb",
       "type": "String"
     },
     "storageAccountType": {
