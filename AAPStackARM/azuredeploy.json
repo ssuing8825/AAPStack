@@ -94,17 +94,13 @@
       "defaultValue": "SuingSystemTopicNameforEventGrid",
       "type": "String"
     },
-    "databaseAccounts_conversion_cosmosdb_name": {
-      "defaultValue": "conversion-cosmosdb",
-      "type": "String"
-    },
     "CosmosDBname": {
       "defaultValue": "aapstack-cosmos",
       "type": "String"
     }
   },
   "variables": {
-    "accountName": "[toLower(parameters('databaseAccounts_conversion_cosmosdb_name'))]",
+    "accountName": "[toLower(parameters('CosmosDBname'))]",
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[parameters('appName')]",
     "applicationInsightsName": "[parameters('components_AAPStack_AI_name')]",
