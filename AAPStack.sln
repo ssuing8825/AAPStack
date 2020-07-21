@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		ExportedTemplate-JunkFunctionTest_RG\template.json = ExportedTemplate-JunkFunctionTest_RG\template.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConversionStartFunction", "ConversionStartFunction\ConversionStartFunction.csproj", "{747C562D-D70C-4199-BE38-31821D21A1A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConversionStartFunction", "ConversionStartFunction\ConversionStartFunction.csproj", "{747C562D-D70C-4199-BE38-31821D21A1A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConversionTracking", "ConversionTracking\ConversionTracking.csproj", "{99061772-93BB-4CD0-88B6-85A2FA498B09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{747C562D-D70C-4199-BE38-31821D21A1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{747C562D-D70C-4199-BE38-31821D21A1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{747C562D-D70C-4199-BE38-31821D21A1A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99061772-93BB-4CD0-88B6-85A2FA498B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99061772-93BB-4CD0-88B6-85A2FA498B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99061772-93BB-4CD0-88B6-85A2FA498B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99061772-93BB-4CD0-88B6-85A2FA498B09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,8 +15,12 @@
     <Content Include="Deployment\linkupsubscription.parameters.json" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.CosmosDB" Version="3.0.5" />
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.EventGrid" Version="2.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConversionTracking\ConversionTracking.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="function.json">

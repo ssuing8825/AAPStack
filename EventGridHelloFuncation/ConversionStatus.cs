@@ -7,6 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using ConversionTracking.Manager;
+using Shared.Model;
 
 namespace EventGridHelloFuncation
 {
@@ -22,8 +24,11 @@ namespace EventGridHelloFuncation
             string name = req.Query["name"];
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            var conversionCommand = JsonConvert.DeserializeObject<ConversionEvent>(requestBody);
+           
+
+            var flowManager = new ConversionFlowManager(log);
+            await flowManager.SetProcessToStarted_Extracting(conversionCommand);
 
             string responseMessage = string.IsNullOrEmpty(name)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
