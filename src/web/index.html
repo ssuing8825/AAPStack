@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Vanilla JavaScript App</title>
+</head>
+
+<body>
+  <main>
+    <h1>Vanilla JavaScript App</h1>
+    <p>Loading content from the API: <b id="name">...</b></p>
+  </main>
+
+  <script>
+  
+fetch(`https://aisapiminstancetest.azure-api.net/AAPStackFunction/ConversionStart?name=JoeDark`,{
+	  mode: 'cors',
+	  headers: {'Ocp-Apim-Subscription-Key': 'f6967ed8712b4b7d8c718d416dae309a'
+      }}).then(function(response) {
+  return response.text();
+}).then(function(text) {
+ document.querySelector('#name').textContent = text;
+});
+
+  
+  
+  </script>
+</body>
+
+</html>

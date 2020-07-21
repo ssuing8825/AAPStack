@@ -9,6 +9,36 @@
         "description": "The name of the function app that you wish to create."
       }
     },
+    "databaseName": {
+      "type": "string",
+      "defaultValue": "ConversionTrackingDb",
+      "metadata": {
+        "description": "The name for the SQL database"
+      }
+    },
+    "throughput": {
+      "type": "int",
+      "defaultValue": 400,
+      "minValue": 400,
+      "maxValue": 1000000,
+      "metadata": {
+        "description": "The throughput for the database"
+      }
+    },
+    "container1Name": {
+      "type": "string",
+      "defaultValue": "FlowEvents",
+      "metadata": {
+        "description": "The name for the first SQL container"
+      }
+    },
+    "container2Name": {
+      "type": "string",
+      "defaultValue": "SecondContainer",
+      "metadata": {
+        "description": "The name for the second SQL container"
+      }
+    },
     "components_AAPStack_AI_WorkspaceResourceId": {
       "defaultValue": "/subscriptions/f800f678-35f3-4453-9d5f-1ce0831dada0/resourcegroups/AAPStack_RG/providers/Microsoft.OperationalInsights/workspaces/AAPStack_AI",
       "type": "SecureString"
@@ -64,12 +94,17 @@
       "defaultValue": "SuingSystemTopicNameforEventGrid",
       "type": "String"
     },
+    "databaseAccounts_conversion_cosmosdb_name": {
+      "defaultValue": "conversion-cosmosdb",
+      "type": "String"
+    },
     "CosmosDBname": {
       "defaultValue": "aapstack-cosmos",
       "type": "String"
     }
   },
   "variables": {
+    "accountName": "[toLower(parameters('databaseAccounts_conversion_cosmosdb_name'))]",
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[parameters('appName')]",
     "applicationInsightsName": "[parameters('components_AAPStack_AI_name')]",
@@ -166,6 +201,49 @@
         "dependsOn": [],
         "capabilities": [],
         "enableFreeTier": true
+      }
+    },
+
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts/apis/databases",
+      "name": "[concat(variables('accountName'), '/sql/', parameters('databaseName'))]",
+      "apiVersion": "2016-03-31",
+      "dependsOn": [ "[resourceId('Microsoft.DocumentDB/databaseAccounts/', variables('accountName'))]" ],
+      "properties": {
+        "resource": {
+          "id": "[parameters('databaseName')]"
+        },
+        "options": { "throughput": "[parameters('throughput')]" }
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDb/databaseAccounts/apis/databases/containers",
+      "name": "[concat(variables('accountName'), '/sql/', parameters('databaseName'), '/', parameters('container1Name'))]",
+      "apiVersion": "2016-03-31",
+      "dependsOn": [ "[resourceId('Microsoft.DocumentDB/databaseAccounts/apis/databases', variables('accountName'), 'sql', parameters('databaseName'))]" ],
+      "properties": {
+        "resource": {
+          "id": "[parameters('container1Name')]",
+          "partitionKey": {
+            "paths": [
+              "/PolicyNumber"
+            ],
+            "kind": "Hash"
+          },
+          "indexingPolicy": {
+            "indexingMode": "consistent",
+            "includedPaths": [
+              {
+                "path": "/*"
+              }
+            ],
+            "excludedPaths": [
+              {
+                "path": "/MyPathToNotIndex/*"
+              }
+            ]
+          }
+        }
       }
     },
     {
