@@ -9,21 +9,41 @@
 </head>
 
 <body>
+
   <main>
     <h1>Vanilla JavaScript App</h1>
     <p>Loading content from the API: <b id="name">...</b></p>
+	<form onsubmit="return myFunction(event)">
+  <label for="fname">Name:</label><br>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="fpolnum">PolicyNumber:</label><br>
+  <input type="text" id="fpolnum" name="fpolnum"><br><br>
+  <input type="submit" value="Submit">
+</form> 
   </main>
 
   <script>
   
-fetch(`https://aisapiminstancetest.azure-api.net/AAPStackFunction/ConversionStart?name=JoeDark`,{
-	  mode: 'cors',
-	  headers: {'Ocp-Apim-Subscription-Key': 'f6967ed8712b4b7d8c718d416dae309a'
-      }}).then(function(response) {
-  return response.text();
-}).then(function(text) {
- document.querySelector('#name').textContent = text;
-});
+  function myFunction(e) {
+e.preventDefault();
+  var form = document.querySelector("form")
+var formName = form.elements.fname.value;
+var policynumber = form.elements.fpolnum.value;
+
+	fetch(`https://aisapiminstancetest.azure-api.net/AAPStackFunction/ConversionStatus?name=`+formName,{
+		  mode: 'cors',
+		  method: 'POST',
+		  headers: {'Ocp-Apim-Subscription-Key': '54f0d4e887d64400aa745c5512346ea9'},
+		  body: JSON.stringify({CorrelationId:formName,PolicyNumber:policynumber })
+		  }).then(function(response) {
+	  return response.text();
+	}).then(function(text) {
+	 document.querySelector('#name').textContent = text;
+	});
+return false;
+}
+
+
 
   
   
